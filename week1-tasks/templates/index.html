@@ -1,0 +1,89 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="row mb-4">
+    <div class="col-md-8">
+        <h1><i class="fas fa-users me-2"></i>Contact Management System</h1>
+        <p class="text-muted">Manage your contacts efficiently</p>
+    </div>
+    <div class="col-md-4">
+        <div class="card stats-card">
+            <div class="card-body text-center">
+                <h3>{{ stats.total }}</h3>
+                <p class="mb-0">Total Contacts</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row mb-4">
+    <div class="col-md-8">
+        <form method="GET" class="d-flex">
+            <input class="form-control me-2" type="search" name="search" 
+                   placeholder="Search contacts..." value="{{ search }}">
+            <button class="btn btn-outline-primary" type="submit">
+                <i class="fas fa-search"></i>
+            </button>
+        </form>
+    </div>
+    <div class="col-md-4">
+        <a href="{{ url_for('add_contact') }}" class="btn btn-primary w-100">
+            <i class="fas fa-plus me-2"></i>Add New Contact
+        </a>
+    </div>
+</div>
+
+{% if contacts %}
+    <div class="row">
+        {% for contact in contacts %}
+        <div class="col-md-6 col-lg-4 mb-4">
+            <div class="card contact-card h-100">
+                <div class="card-body">
+                    <h5 class="card-title">
+                        <i class="fas fa-user me-2"></i>{{ contact.name }}
+                    </h5>
+                    <p class="card-text">
+                        <i class="fas fa-phone me-2"></i>{{ contact.phone }}<br>
+                        {% if contact.email %}
+                            <i class="fas fa-envelope me-2"></i>{{ contact.email }}<br>
+                        {% endif %}
+                        {% if contact.address %}
+                            <i class="fas fa-map-marker-alt me-2"></i>{{ contact.address }}
+                        {% endif %}
+                    </p>
+                </div>
+                <div class="card-footer bg-transparent">
+                    <div class="btn-group w-100" role="group">
+                        <a href="{{ url_for('edit_contact', name=contact.name) }}" 
+                           class="btn btn-outline-primary btn-sm">
+                            <i class="fas fa-edit"></i> Edit
+                        </a>
+                        <form method="POST" action="{{ url_for('delete_contact', name=contact.name) }}" 
+                              class="d-inline" onsubmit="return confirm('Are you sure?')">
+                            <button type="submit" class="btn btn-outline-danger btn-sm">
+                                <i class="fas fa-trash"></i> Delete
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+{% else %}
+    <div class="text-center py-5">
+        <i class="fas fa-address-book fa-5x text-muted mb-3"></i>
+        <h3>No contacts found</h3>
+        <p class="text-muted">
+            {% if search %}
+                No contacts match your search "{{ search }}"
+            {% else %}
+                Start by adding your first contact
+            {% endif %}
+        </p>
+        <a href="{{ url_for('add_contact') }}" class="btn btn-primary">
+            <i class="fas fa-plus me-2"></i>Add Contact
+        </a>
+    </div>
+{% endif %}
+{% endblock %}

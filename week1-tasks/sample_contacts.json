@@ -1,0 +1,20 @@
+{
+  "john doe": {
+    "name": "John Doe",
+    "phone": "1234567890",
+    "email": "john.doe@email.com",
+    "address": "123 Main Street, New York, NY"
+  },
+  "jane smith": {
+    "name": "Jane Smith",
+    "phone": "9876543210",
+    "email": "jane.smith@company.com",
+    "address": "456 Oak Avenue, Los Angeles, CA"
+  },
+  "bob johnson": {
+    "name": "Bob Johnson",
+    "phone": "5555551234",
+    "email": "bob.johnson@example.org",
+    "address": "789 Pine Road, Chicago, IL"
+  }
+}

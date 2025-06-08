@@ -1,0 +1,14 @@
+# Contact Management System Requirements
+# This project uses only Python built-in modules, no external dependencies required
+
+# Python version: 3.6 or higher
+
+# Built-in modules used:
+# - json (for data persistence)
+# - os (for file operations)
+# - re (for data validation)
+# - typing (for type hints)
+
+# External dependencies:
+Flask==2.3.3
+gunicorn==21.2.0
